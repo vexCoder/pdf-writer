@@ -1,0 +1,314 @@
+{
+    "key": "pldt-application",
+    "imageRows": "2",
+    "plot": [{
+
+            "key": "FIRST NAME",
+            "s": "8",
+            "loc": [{
+                    "key": "First",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer's first name",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+
+            "key": "MIDDLE NAME",
+            "s": "8",
+            "loc": [{
+                    "key": "Middle",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer's middle name",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+
+            "key": "LAST NAME",
+            "s": "8",
+            "loc": [{
+                    "key": "Last",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer's last name",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+
+            "key": "Birthday",
+            "s": "8",
+            "loc": [{
+                "key": "Birthday",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "VALID ID - MUST BE CLEAR",
+            "s": "8",
+            "loc": [{
+                "key": "IDProvided",
+                "type": "dropdown"
+            }]
+        },
+        {
+
+            "key": "ID NUMBER or LICENSE NUMBER",
+            "s": "8",
+            "loc": [{
+                "key": "ID Number",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "STREET NAME",
+            "s": "8",
+            "loc": [{
+                "key": "Street",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "HOUSE NO.",
+            "s": "8",
+            "loc": [{
+                "key": "House No",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "SUBDIVISION/VILLAGE or PUROK",
+            "s": "8",
+            "loc": [{
+                "key": "Village/Sub Division",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "BARANGAY",
+            "s": "8",
+            "loc": [{
+                "key": "Barangay",
+                "type": "options"
+            }]
+        },
+        {
+
+            "key": "CITY/MUNICIPALITY",
+            "s": "8",
+            "loc": [{
+                "key": "City",
+                "type": "options"
+            }]
+        },
+        {
+
+            "key": "PROVINCE",
+            "s": "8",
+            "loc": [{
+                "key": "Province",
+                "type": "dropdown"
+            }]
+        },
+        {
+
+            "key": "LANDMARK",
+            "s": "8",
+            "loc": [{
+                "key": "Nearest landmark",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "MOBILE NUMBER",
+            "s": "8",
+            "loc": [{
+                "key": "Mobile number",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "ALTERNATIVE MOBILE",
+            "s": "8",
+            "loc": [{
+                "key": "Home number",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "EMAIL ADDRESS",
+            "s": "8",
+            "loc": [{
+                "key": "Email",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "ALTERNATIVE MOBILE",
+            "s": "8",
+            "loc": [{
+                "key": "Home number",
+                "type": "text"
+            }]
+        }, {
+
+            "key": "HOME FIBR LOCK UP PLANS",
+            "s": "8",
+            "fixedValue": "FBMKTPLACE",
+            "loc": [{
+                "key": "MIN",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Lock-in-plan",
+            "s": "8",
+            "fixedValue": "2",
+            "loc": [{
+                "key": "Lock-in-plan",
+                "type": "radio"
+            }]
+        },
+        {
+
+            "key": "Voice (landline/telephone) service 1",
+            "s": "8",
+            "fixedValue": "FTTH",
+            "loc": [{
+                "key": "Voice (landline/telephone) service 1",
+                "type": "text"
+            }, {
+                "key": "Voice (landline/telephone) service 2",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Sales Event Code1",
+            "s": "8",
+            "fixedValue": "FBMKTPLACE",
+            "loc": [{
+                "key": "Sales Event Code1",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "AgentCode1",
+            "s": "8",
+            "fixedValue": "P4205833",
+            "loc": [{
+                "key": "AgentCode1",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "MIN",
+            "s": "8",
+            "fixedValue": "FBMKTPLACE",
+            "loc": [{
+                "key": "MIN",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Timestamp",
+            "s": "8",
+            "format": "MMMM DD, YYYY",
+            "type": "date",
+            "loc": [{
+                "key": "Customer signed date",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Modem Fee + Installation Fee",
+            "s": "8",
+            "optionValues": ["HBBS", "100/MONTH"],
+            "loc": [{
+                "key": "Modem Fee Installation Fee 1",
+                "type": "text"
+            }, {
+                "key": "Modem Fee Installation Fee 2",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Authorize to publish name in White Pages 2",
+            "s": "8",
+            "fixedValue": "1",
+            "loc": [{
+                "key": "Authorize to publish name in White Pages 2",
+                "type": "checkbox"
+            }]
+        },
+        {
+
+            "key": "ID with 3 specimen signatures. ",
+            "s": "8",
+            "loc": [{
+                "page": "1",
+                "row": "1",
+                "type": "attachment"
+            }]
+        },
+        {
+
+            "key": "SELFIE with your Valid ID",
+            "s": "8",
+            "loc": [{
+                "page": "1",
+                "row": "2",
+                "type": "attachment"
+            }]
+        },
+        {
+
+            "key": "Volume Allowance",
+            "s": "8",
+            "fixedValue": "UNLI",
+            "loc": [{
+                "key": "Volume Allowance 1",
+                "type": "text"
+            }, {
+                "key": "Volume Allowance 2",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "HOME FIBR LOCK UP PLANS",
+            "s": "8",
+            "loc": [{
+                "key": "Data (broadband/internet) service 1",
+                "type": "dropdown"
+            }, {
+                "key": "Data (broadband/internet) service 2",
+                "type": "dropdown"
+            }]
+        }
+    ]
+}

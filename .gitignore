@@ -1,0 +1,15 @@
+notes
+exports
+
+*/node_modules
+
+*/.env.production
+*/.env.development
+
+*/yarn.lock
+*/yarn-error.lock
+*/package.lock
+
+*/dist
+
+*/credentials.json
