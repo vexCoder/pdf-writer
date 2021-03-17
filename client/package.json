@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "license": "ISC",
     "scripts": {
-        "predev": "yarn install & yarn lint:fix",
+        "predev:test": "yarn install & yarn lint:fix",
         "dev": "vite --port 3001 --mode development",
         "build": "tsc && vite build",
         "serve": "vite preview",

@@ -132,7 +132,7 @@ export default {
           status: 0,
           documentId: id,
           document,
-          expire: dayjs().add(30, 'second').unix(),
+          expire: dayjs().add(1, 'hour').unix(),
         },
       ]).write();
 
@@ -184,7 +184,8 @@ const processCSV = async (
   if (queue[_i]) {
     queue[_i].process = 'converting';
     db.set('queue', queue).write();
-    const max = process.env.NODE_ENV === 'production' ? data.length - 1 : 1;
+    const max =
+      process.env.NODE_ENV === 'production' ? data.length - 1 : data.length - 1;
     queue[_i].max = max;
     for (let i = 0; i < max; i++) {
       const uint8Array = await fs.readFile(

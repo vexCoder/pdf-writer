@@ -97,7 +97,7 @@ export const copyTemplates = async () => {
 
 export const loadCrons = async () => {
   // '00 */1 * * *'
-  const cron = schedule.scheduleJob('*/5 * * * * *', async () => {
+  const cron = schedule.scheduleJob('00 */1 * * *', async () => {
     const db = await loadDb();
     const queue = db.get('queue').value();
 
