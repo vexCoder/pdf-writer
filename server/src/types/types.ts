@@ -8,6 +8,8 @@ export interface IConfig {
   plot: {
     key: string;
     s: string;
+    keyValues?: string[];
+    formatValue?: string;
     fixedValue?: string;
     format?: string;
     type?: 'date' | string;

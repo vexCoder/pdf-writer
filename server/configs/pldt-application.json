@@ -240,6 +240,9 @@
             "loc": [{
                 "key": "Customer signed date",
                 "type": "text"
+            }, {
+                "key": "T&C Privacy Notice- Signed Date",
+                "type": "text"
             }]
         },
         {
@@ -308,6 +311,32 @@
             }, {
                 "key": "Data (broadband/internet) service 2",
                 "type": "dropdown"
+            }, {
+                "key": "Speed 1",
+                "type": "text"
+            }, {
+                "key": "Speed 2",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Customer Name",
+            "keyValues": ["FIRST NAME", "MIDDLE NAME", "LAST NAME"],
+            "formatValue": "0 1 2",
+            "s": "8",
+            "loc": [{
+                "key": "T&C Privacy Notice- Printed Name",
+                "type": "text"
+            }, {
+                "key": "T&C Printed Name",
+                "type": "text"
+            }, {
+                "key": "Customer printed name CAF 1",
+                "type": "text"
+            }, {
+                "key": "Customer printed name CAF 2",
+                "type": "text"
             }]
         }
     ]

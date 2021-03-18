@@ -162,14 +162,30 @@ const processCSV = async (
 
   const data = raw.split('\r\n');
   const ndata: any[] = [];
+  let headers: any[] = [];
   await new Promise((resolve) => {
     Papa.parse(raw, {
       delimiter: ',',
       newline: '\r\n',
-      header: true,
+      quoteChar: '"',
       step: (res) => {
         // WRITE DATA TO PDF
-        ndata.push(res.data);
+        if (headers.length === 0) {
+          headers = res.data;
+        } else {
+          ndata.push(
+            res.data.reduce(
+              (p, c, i) => ({
+                ...(p as { [key: string]: any }),
+                // @ts-ignore
+                ...(c &&
+                  (c as string).length &&
+                  ({ [headers[i]]: c } as { [key: string]: any })),
+              }),
+              {}
+            )
+          );
+        }
       },
       complete: (res) => {
         resolve(res);
@@ -196,11 +212,25 @@ const processCSV = async (
       const lastPage = _.last(pdfDoc.getPageIndices()) || 0;
 
       const res = ndata[i];
+      console.log(res);
       try {
         await Promise.all(
-          config.plot.map((v) =>
-            placeValue(
-              (res as any)[v.key],
+          config.plot.map((v) => {
+            let value;
+
+            if (v.formatValue) {
+              value = v.keyValues
+                ?.map((o) => (res as any)[o])
+                .reduce(
+                  (p, c, index) => p.replace(`${index}`, c),
+                  v.formatValue
+                );
+            } else {
+              value = (res as any)[v.key];
+            }
+
+            return placeValue(
+              value,
               parseInt(config.imageRows, 10),
               v.loc,
               v.s,
@@ -212,8 +242,8 @@ const processCSV = async (
               v.format,
               v.fixedValue,
               v.optionValues
-            )
-          )
+            );
+          })
         );
       } catch (e) {
         console.log(e);
@@ -357,6 +387,7 @@ export const placeValue = async (
       case 'dropdown': {
         const field = form.getDropdown(loc.key);
         fieldName = field.getName();
+        console.log(fieldName, fixedValue || value);
         try {
           if (!field) console.log(loc.key);
           field.setFontSize(parseInt(size, 10));
@@ -365,7 +396,7 @@ export const placeValue = async (
           field.setFontSize(parseInt(size, 10));
           field.setOptions([fixedValue || value]);
           field.select(fixedValue || value);
-          console.log(fixedValue || value);
+          console.log(fieldName, fixedValue || value);
           console.log(`Dropdown Error: ${e.name}`);
         }
         break;
@@ -469,7 +500,7 @@ export const placeValue = async (
               });
             }
           } catch (e) {
-            console.log(`Attachment Error: ${e.name}`, e);
+            console.log(`Attachment Error: ${e.name}`);
           }
         }
         break;
