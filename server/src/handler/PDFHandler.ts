@@ -485,7 +485,7 @@ export const placeValue = async (
                     x: centerX - (text.length * 64) / 4,
                     y: centerY - 64,
                     size: 64,
-                    color: rgb(1, 0, 0),
+                    color: rgb(0.5, 0.5, 0.5),
                     lineHeight: 24,
                     opacity: 0.45,
                     rotate: degrees(30),
