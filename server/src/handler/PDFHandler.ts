@@ -15,7 +15,6 @@ import {
   PDFDocument,
   PDFImage,
   rgb,
-  Rotation,
   TextAlignment,
 } from 'pdf-lib';
 import { IConfig, IConfigLocation, RequestSession } from '../types/types';
