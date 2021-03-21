@@ -5,6 +5,7 @@ export type RequestSession = Request & { session: any };
 export interface IConfig {
   key: string;
   imageRows: string;
+  newPage: string;
   plot: {
     key: string;
     s: string;
