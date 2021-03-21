@@ -9,7 +9,7 @@ import { google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
 import copy from 'copyfiles';
 import schedule from 'node-schedule';
-import { checkIfFileFolderExists } from './helper';
+import { checkIfFileFolderExists, getQueues } from './helper';
 import paths from './paths';
 
 export const setDefaultTimezone = (area: string = 'Asia/Manila') => {
@@ -99,21 +99,7 @@ export const loadCrons = async () => {
   // '00 */1 * * *'
   const cron = schedule.scheduleJob('00 */1 * * *', async () => {
     const db = await loadDb();
-    const queue = db.get('queue').value();
-
-    const getNotExpiring = (v: any) => {
-      const check = dayjs().isBefore(dayjs.unix(v.expire), 'second');
-      return check;
-    };
-
-    const getExpiring = (v: any) => {
-      const check = dayjs().isBefore(dayjs.unix(v.expire), 'second');
-      return !check;
-    };
-
-    const queueNotExpiring = queue.filter(getNotExpiring);
-
-    const queueExpiring = queue.filter(getExpiring);
+    const { expiring, notExpiring } = await getQueues();
 
     const exportDir = await fs.readdir(paths.EXPORTS);
     const tempDir = await fs.readdir(paths.TEMP);
@@ -123,7 +109,7 @@ export const loadCrons = async () => {
         exportDir
           .filter((v) => {
             let check = false;
-            queueExpiring.forEach((el: any) => {
+            expiring.forEach((el: any) => {
               check = check || v.indexOf(el.id) !== -1;
             });
             return check;
@@ -137,7 +123,7 @@ export const loadCrons = async () => {
         tempDir
           .filter((v) => {
             let check = false;
-            queueExpiring.forEach((el: any) => {
+            expiring.forEach((el: any) => {
               check = check || v.indexOf(el.id) !== -1;
             });
             return check;
@@ -150,9 +136,9 @@ export const loadCrons = async () => {
       console.log(error);
     }
 
-    db.set('queue', queueNotExpiring).write();
+    db.set('queue', notExpiring).write();
     console.log(`Deleted: `);
-    console.log(queueExpiring.map((v: any) => v.id));
+    console.log(expiring.map((v: any) => v.id));
     console.log(
       dayjs(cron.nextInvocation()).format('MMMM DD, YYYY hh:mm:ss a')
     );

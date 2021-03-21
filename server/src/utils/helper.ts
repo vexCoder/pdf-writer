@@ -1,9 +1,11 @@
 import axios from 'axios';
+import dayjs from 'dayjs';
 import { Response } from 'express';
 import fs, { createWriteStream } from 'fs-extra';
 import * as stream from 'stream';
 import { promisify } from 'util';
 import { RequestSession } from '../types/types';
+import { loadDb } from './initialize';
 
 export const checkIfFileFolderExists = async (
   path: string
@@ -58,4 +60,28 @@ export const sleep = async (timeout: number) => {
       resolve(null);
     }, timeout || 0);
   });
+};
+
+export const getQueues = async () => {
+  const db = await loadDb();
+  const queue = db.get('queue').value();
+
+  const getNotExpiring = (v: any) => {
+    const check = dayjs().isBefore(dayjs.unix(v.expire), 'second');
+    return check;
+  };
+
+  const getExpiring = (v: any) => {
+    const check = dayjs().isBefore(dayjs.unix(v.expire), 'second');
+    return !check;
+  };
+
+  const notExpiring = queue.filter(getNotExpiring);
+
+  const expiring = queue.filter(getExpiring);
+
+  return {
+    expiring,
+    notExpiring,
+  };
 };

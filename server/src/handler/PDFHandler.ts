@@ -1,15 +1,23 @@
+import archiver from 'archiver';
+import dayjs from 'dayjs';
 import { Response } from 'express';
 import fs from 'fs-extra';
-import { drive_v3, google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
+import { drive_v3, google } from 'googleapis';
+import _ from 'lodash';
+import Lowdb from 'lowdb';
 import { nanoid } from 'nanoid';
 import Papa from 'papaparse';
 import path from 'path';
-import { PageSizes, PDFDocument, PDFImage } from 'pdf-lib';
-import _ from 'lodash';
-import dayjs from 'dayjs';
-import Lowdb from 'lowdb';
-import archiver from 'archiver';
+import {
+  degrees,
+  PageSizes,
+  PDFDocument,
+  PDFImage,
+  rgb,
+  Rotation,
+  TextAlignment,
+} from 'pdf-lib';
 import { IConfig, IConfigLocation, RequestSession } from '../types/types';
 import { clearCookie } from '../utils/helper';
 import { loadCredentials, loadDb } from '../utils/initialize';
@@ -289,8 +297,8 @@ export const archiveFiles = async ({
   key,
   document,
   max,
-}: IArchiveFiles): Promise<void> =>
-  new Promise((resolve, _reject) => {
+}: IArchiveFiles): Promise<void> => {
+  const checkArchived = await new Promise((resolve, _reject) => {
     const output = fs.createWriteStream(path.join(paths.OUTPUT, `${key}.zip`));
 
     const archive = archiver('zip', {
@@ -312,9 +320,35 @@ export const archiveFiles = async ({
       console.log(
         'archiver has been finalized and the output file descriptor has closed.'
       );
-      resolve();
+      resolve(true);
     });
   });
+
+  if (checkArchived) {
+    const exportDir = await fs.readdir(paths.EXPORTS);
+    const tempDir = await fs.readdir(paths.TEMP);
+
+    try {
+      await Promise.all(
+        exportDir
+          .filter((v) => v.indexOf(key) !== -1)
+          .map(async (v) => {
+            await fs.unlink(path.join(paths.EXPORTS, v));
+          })
+      );
+
+      await Promise.all(
+        tempDir
+          .filter((v) => v.indexOf(key) !== -1)
+          .map(async (v) => {
+            await fs.unlink(path.join(paths.TEMP, v));
+          })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
 export const placeValue = async (
   value: string,
@@ -342,6 +376,9 @@ export const placeValue = async (
         try {
           if (!field) console.log(loc.key);
           field.setMaxLength(500);
+          if (loc.alignment) {
+            field.setAlignment(TextAlignment[loc.alignment]);
+          }
           const _value = optionValues
             ? optionValues[parseInt(value, 10)]
             : fixedValue || value;
@@ -436,6 +473,26 @@ export const placeValue = async (
           try {
             if (!page) {
               page = pdfDoc.addPage(PageSizes.A4);
+              for (let x = 0; x < 2; x++) {
+                for (let y = 0; y < 4; y++) {
+                  const text = 'RAP';
+                  const x1 = (page.getWidth() / 2) * x;
+                  const x2 = (page.getWidth() / 2) * (x + 1);
+                  const y1 = (page.getHeight() / 4) * y;
+                  const y2 = (page.getHeight() / 4) * (y + 1);
+                  const centerX = (x1 + x2) / 2;
+                  const centerY = (y1 + y2) / 2;
+                  page.drawText(text, {
+                    x: centerX - (text.length * 64) / 4,
+                    y: centerY - 64,
+                    size: 64,
+                    color: rgb(1, 0, 0),
+                    lineHeight: 24,
+                    opacity: 0.45,
+                    rotate: degrees(30),
+                  });
+                }
+              }
             }
 
             const _row = parseInt(loc.row, 10);

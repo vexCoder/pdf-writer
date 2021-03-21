@@ -30,8 +30,8 @@ module.exports = {
         "no-underscore-dangle": 'off',
         "consistent-return": 'off',
         "global-require": "off",
-        "no-loop-func": "off",
-        "no-await-in-loop": "off"
+        "no-await-in-loop": "off",
+        "no-loop-func": "off"
     },
     ignorePatterns: ["*.js"]
 };

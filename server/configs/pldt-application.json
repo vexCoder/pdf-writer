@@ -3,45 +3,40 @@
     "imageRows": "2",
     "plot": [{
 
+            "key": "PLDT rep printed name SC",
+            "s": "8",
+            "fixedValue": "RAP",
+            "loc": [{
+                "key": "PLDT rep printed name SC",
+                "alignment": "Center",
+                "type": "text"
+            }]
+        }, {
+
             "key": "FIRST NAME",
             "s": "8",
             "loc": [{
-                    "key": "First",
-                    "type": "text"
-                },
-                {
-                    "key": "Customer's first name",
-                    "type": "text"
-                }
-            ]
+                "key": "Customer's first name",
+                "type": "text"
+            }]
         },
         {
 
             "key": "MIDDLE NAME",
             "s": "8",
             "loc": [{
-                    "key": "Middle",
-                    "type": "text"
-                },
-                {
-                    "key": "Customer's middle name",
-                    "type": "text"
-                }
-            ]
+                "key": "Customer's middle name",
+                "type": "text"
+            }]
         },
         {
 
             "key": "LAST NAME",
             "s": "8",
             "loc": [{
-                    "key": "Last",
-                    "type": "text"
-                },
-                {
-                    "key": "Customer's last name",
-                    "type": "text"
-                }
-            ]
+                "key": "Customer's last name",
+                "type": "text"
+            }]
         },
         {
 
