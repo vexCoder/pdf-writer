@@ -470,28 +470,10 @@ export const placeValue = async (
           }
           const data = value ? (value.split(',') as string[]) : [];
           try {
+            let newPage = false;
             if (!page) {
+              newPage = true;
               page = pdfDoc.addPage(PageSizes.A4);
-              for (let x = 0; x < 2; x++) {
-                for (let y = 0; y < 4; y++) {
-                  const text = 'RAP';
-                  const x1 = (page.getWidth() / 2) * x;
-                  const x2 = (page.getWidth() / 2) * (x + 1);
-                  const y1 = (page.getHeight() / 4) * y;
-                  const y2 = (page.getHeight() / 4) * (y + 1);
-                  const centerX = (x1 + x2) / 2;
-                  const centerY = (y1 + y2) / 2;
-                  page.drawText(text, {
-                    x: centerX - (text.length * 64) / 4,
-                    y: centerY - 64,
-                    size: 64,
-                    color: rgb(0.5, 0.5, 0.5),
-                    lineHeight: 24,
-                    opacity: 0.45,
-                    rotate: degrees(30),
-                  });
-                }
-              }
             }
 
             const _row = parseInt(loc.row, 10);
@@ -529,7 +511,7 @@ export const placeValue = async (
                 page.getHeight() / imageRows
               );
 
-              const row = page.getHeight() - _row * (newHeight + 10);
+              const row = page.getHeight() - _row * (newHeight + 20);
 
               if (maxHeight < row) {
                 maxHeight = row;
@@ -554,6 +536,29 @@ export const placeValue = async (
                 x,
                 y,
               });
+            }
+
+            if (newPage) {
+              for (let x = 0; x < 2; x++) {
+                for (let y = 0; y < 4; y++) {
+                  const text = 'RAP';
+                  const x1 = (page.getWidth() / 2) * x;
+                  const x2 = (page.getWidth() / 2) * (x + 1);
+                  const y1 = (page.getHeight() / 4) * y;
+                  const y2 = (page.getHeight() / 4) * (y + 1);
+                  const centerX = (x1 + x2) / 2;
+                  const centerY = (y1 + y2) / 2;
+                  page.drawText(text, {
+                    x: centerX - (text.length * 64) / 4,
+                    y: centerY - 64,
+                    size: 64,
+                    color: rgb(0.5, 0.5, 0.5),
+                    lineHeight: 24,
+                    opacity: 0.45,
+                    rotate: degrees(30),
+                  });
+                }
+              }
             }
           } catch (e) {
             console.log(`Attachment Error: ${e.name}`);
