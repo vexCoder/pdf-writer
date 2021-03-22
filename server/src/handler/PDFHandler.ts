@@ -277,10 +277,10 @@ const processCSV = async (
               const centerX = (x1 + x2) / 2;
               const centerY = (y1 + y2) / 2;
               page.drawText(text, {
-                x: centerX - (text.length * 64) / 4,
-                y: centerY - 64,
-                size: 64,
-                color: rgb(0.5, 0.5, 0.5),
+                x: centerX - (text.length * 128) / 4,
+                y: centerY - 128,
+                size: 128,
+                color: rgb(1, 0, 0),
                 lineHeight: 24,
                 opacity: 0.45,
                 rotate: degrees(30),
