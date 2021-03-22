@@ -113,17 +113,17 @@ const main = async () => {
   app.use(helmet());
   app.use(compression());
 
-  app.use(express.static(path.join(__dirname, '../../client/dist/')));
-  app.use(express.static(path.join(__dirname, '../../client/dist/assets/')));
+  // app.use(express.static(path.join(__dirname, '../../client/dist/')));
+  // app.use(express.static(path.join(__dirname, '../../client/dist/assets/')));
   app.use(`/api/${process.env.API_VERSION}`, router);
 
   app.get('/api', (_request, response) => {
     response.send(`pdf-writer ${process.env.API_VERSION}`);
   });
 
-  app.get('*', (_request, response) => {
-    response.sendFile(path.join(__dirname, '../../client/dist/index.html'));
-  });
+  // app.get('*', (_request, response) => {
+  //   response.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+  // });
 
   app.listen(_port, () => console.log(`Listening on port ${_port}`));
 };

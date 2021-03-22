@@ -39,7 +39,7 @@ export default {
       res.download(path.join(paths.OUTPUT, `${key}.zip`));
     } catch (e) {
       console.log(e);
-      res.status(404).send({
+      res.send({
         success: false,
         error: e.stack,
       });
@@ -53,7 +53,7 @@ export default {
       if (queue) {
         const selected = queue.find((v: any) => v.id === key);
         if (selected) {
-          res.status(200).send({
+          res.send({
             success: true,
             data: {
               status: selected.status,
@@ -61,17 +61,17 @@ export default {
             },
           });
         } else {
-          res.status(404).send({
+          res.send({
             success: false,
           });
         }
       } else {
-        res.status(404).send({
+        res.send({
           success: false,
         });
       }
     } catch (error) {
-      res.status(404).send({
+      res.send({
         success: false,
         error: error.stack,
       });
@@ -87,7 +87,7 @@ export default {
       const user = users.find((v: any) => v.id === req.session.userId);
       if (!user) {
         await clearCookie({ req, res });
-        res.status(404).send({ success: false });
+        res.send({ success: false });
         return;
       }
       client.setCredentials(user.tokens);
@@ -104,7 +104,7 @@ export default {
       const config = JSON.parse(templateJSON) as IConfig;
 
       if (!config) {
-        res.status(404).send({ success: false });
+        res.send({ success: false });
         return;
       }
 
@@ -146,9 +146,9 @@ export default {
 
       processCSV(key, config, db, drive, client, document);
 
-      res.status(200).send({ success: true, data: { key } });
+      res.send({ success: true, data: { key } });
     } catch (error) {
-      res.status(404).send({
+      res.send({
         success: false,
         error: error.stack,
       });
