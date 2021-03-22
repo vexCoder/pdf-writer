@@ -102,7 +102,7 @@ const main = async () => {
         secure: process.env.NODE_ENV === 'production',
         domain:
           process.env.NODE_ENV === 'production'
-            ? '*.pldthelper.test'
+            ? '*.pldtwriter.com'
             : undefined,
       },
     })
@@ -114,6 +114,7 @@ const main = async () => {
   app.use(compression());
 
   app.use(express.static(path.join(__dirname, '../../client/dist/')));
+  app.use(express.static(path.join(__dirname, '../../client/dist/assets/')));
   app.use(`/api/${process.env.API_VERSION}`, router);
 
   app.get('/api', (_request, response) => {

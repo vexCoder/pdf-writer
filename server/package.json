@@ -10,7 +10,7 @@
         "run:start": "cross-env NODE_ENV=production node dist/index.js",
         "predev:test": "yarn install & yarn lint:fix",
         "dev": "concurrently -p \"[{time}] [{name}]\" -t HH:mm:ss -c red,green -n WATCH,DEV \"yarn watch\" \"yarn run:dev\"",
-        "start": "yarn build & concurrently -p \"[{time}] [{name}]\" -t HH:mm:ss -c green -n PROD \"yarn run:start\"",
+        "start": "concurrently -p \"[{time}] [{name}]\" -t HH:mm:ss -c green -n PROD \"yarn run:start\"",
         "read:pdf": "nodemon scripts/readPDF.js",
         "lint": "eslint src/*",
         "lint:fix": "eslint --fix src/**/*.ts"
