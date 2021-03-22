@@ -78,7 +78,7 @@ const main = async () => {
     cors({
       credentials: true,
       origin(origin, callback) {
-        const whitelist = ['localhost:3001'];
+        const whitelist = [...process.env.CORS_ORIGIN.split(',')];
         return callback(null, _.includes(whitelist, origin));
       },
     })
