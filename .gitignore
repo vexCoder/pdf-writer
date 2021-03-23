@@ -8,6 +8,7 @@ exports
 
 */yarn.lock
 */yarn-error.lock
+*/yarn-error.log
 */package.lock
 
 */dist

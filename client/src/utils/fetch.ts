@@ -1,3 +1,5 @@
+import axios, { AxiosRequestConfig } from 'axios';
+import fileDownload from 'js-file-download';
 interface IRequest {
   url: string;
   data?: Record<string, unknown>;
@@ -45,23 +47,26 @@ const download = async ({
   filename,
 }: Omit<IRequest, 'method'> & { filename: string }) => {
   try {
-    const options: RequestInit = {
+    const options: AxiosRequestConfig = {
+      url,
       method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
+      responseType: 'blob',
+      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
       },
     };
 
-    await fetch(url, options).then(function (t) {
-      return t.blob().then((b) => {
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(b);
-        a.setAttribute('download', `${filename}.zip`);
-        a.click();
-      });
+    await axios(options).then(function (t: any) {
+      fileDownload(t.data, `${filename}.zip`);
     });
+
+    // return t.blob().then((b: any) => {
+    //   const a = document.createElement('a');
+    //   a.href = URL.createObjectURL(b);
+    //   a.setAttribute('download', `${filename}.zip`);
+    //   a.click();
+    // });
 
     return {
       success: true,
