@@ -45,13 +45,21 @@ const request = async <T>({
 const download = async ({
   url,
   filename,
-}: Omit<IRequest, 'method'> & { filename: string }) => {
+  downloadCallback,
+}: Omit<IRequest, 'method'> & {
+  filename: string;
+  downloadCallback: (status: number) => void;
+}) => {
   try {
     const options: AxiosRequestConfig = {
       url,
       method: 'GET',
       responseType: 'blob',
       withCredentials: true,
+      onDownloadProgress: (evt) => {
+        const percentCompleted = Math.round((evt.loaded * 100) / evt.total);
+        downloadCallback(percentCompleted);
+      },
       headers: {
         'Content-Type': 'application/json',
       },
@@ -119,8 +127,11 @@ export default {
   download: ({
     url,
     filename,
-  }: Omit<IRequest, 'method'> & { filename: string }) =>
-    download({ url, filename }),
+    downloadCallback,
+  }: Omit<IRequest, 'method'> & {
+    filename: string;
+    downloadCallback: (status: number) => void;
+  }) => download({ url, filename, downloadCallback }),
   get: <T>({ url, data }: Omit<IRequest, 'method'>) =>
     request<T>({ url, data, method: 'GET' }),
   post: <T>({ url, data }: Omit<IRequest, 'method'>) =>

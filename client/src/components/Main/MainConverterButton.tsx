@@ -58,6 +58,7 @@ const MainConverterButton: React.FC<IMainConverterButton> = ({ status }) => {
     isComplete,
     key,
     download,
+    downloadStatus,
   } = useConverterContext();
 
   const path = `polygon(0 0, ${status + 2}% 0, ${status}% 100%, 0% 100%)`;
@@ -138,7 +139,9 @@ const MainConverterButton: React.FC<IMainConverterButton> = ({ status }) => {
               className={classes.convertLabel}
               style={{ color: 'white' }}
             >
-              Download
+              {!downloadStatus && 'Download'}
+              {!!downloadStatus &&
+                `Downloading (${downloadStatus.toFixed(2)}%)`}
             </Typography>
           </div>
         </>

@@ -11,6 +11,7 @@ interface IConverterContextValue {
   isComplete?: boolean;
   isCompressing?: boolean;
   key?: string | null;
+  downloadStatus?: number;
   setIsConverting: SetStateForce<boolean>;
   setIsComplete: SetStateForce<boolean>;
   convert: (data: IConvert) => Promise<void>;
@@ -45,6 +46,7 @@ const ConverterProvider: React.FunctionComponent<IConverterContextProps> = ({
   const [isConverting, setIsConverting] = React.useState(false);
   const [isComplete, setIsComplete] = React.useState(false);
   const [isCompressing, setIsCompressing] = React.useState(false);
+  const [downloadStatus, setDownloadStatus] = React.useState(0);
   const [key, setKey] = React.useState<string | null>(null);
 
   const convert = async ({ id, file }: IConvert) => {
@@ -83,6 +85,9 @@ const ConverterProvider: React.FunctionComponent<IConverterContextProps> = ({
       const res = await fetch.download({
         url: `${import.meta.env.VITE_APP_API}/d/download?key=${key}`,
         filename: key,
+        downloadCallback: (status) => {
+          setDownloadStatus(status);
+        },
       });
 
       console.log(res);
@@ -126,6 +131,7 @@ const ConverterProvider: React.FunctionComponent<IConverterContextProps> = ({
         convert,
         key,
         download,
+        downloadStatus,
       }}
     >
       {children}
