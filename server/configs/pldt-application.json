@@ -41,8 +41,10 @@
         },
         {
 
-            "key": "Birthday",
+            "key": "DATE OF BIRTH",
             "s": "8",
+            "format": "MM/DD/YYYY",
+            "type": "date",
             "loc": [{
                 "key": "Birthday",
                 "type": "text"
