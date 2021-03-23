@@ -141,7 +141,9 @@ const MainConverterButton: React.FC<IMainConverterButton> = ({ status }) => {
             >
               {!downloadStatus && 'Download'}
               {!!downloadStatus &&
+                downloadStatus < 100 &&
                 `Downloading (${downloadStatus.toFixed(2)}%)`}
+              {!!downloadStatus && downloadStatus >= 100 && `Download Again`}
             </Typography>
           </div>
         </>
