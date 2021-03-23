@@ -20,23 +20,25 @@ export default {
           if (!email) {
             await clearCookie({ req, res });
             url = await generateURL();
-            res.send({ success: true, data: { url } });
+            res.status(200).send({ success: true, data: { url } });
           } else if (!!email && !!tokens) {
-            res.send({ success: true, data: { isLogin: true, email, tokens } });
+            res
+              .status(200)
+              .send({ success: true, data: { isLogin: true, email, tokens } });
           }
         } else {
           await clearCookie({ req, res });
           url = await generateURL();
-          res.send({ success: true, data: { url } });
+          res.status(200).send({ success: true, data: { url } });
         }
       } else {
-        res.send({
+        res.status(200).send({
           success: true,
           data: null,
         });
       }
     } catch (error) {
-      res.send({
+      res.status(404).send({
         success: false,
         error: error.stack,
         data: null,
@@ -49,7 +51,7 @@ export default {
       let url = '';
       if (!req.session.userId) {
         url = await generateURL();
-        res.send({ success: true, data: { url } });
+        res.status(200).send({ success: true, data: { url } });
       } else {
         const users = db.get('users').value();
         const user = users.find((v: any) => v.id === req.session.userId);
@@ -58,18 +60,20 @@ export default {
           if (!email) {
             await clearCookie({ req, res });
             url = await generateURL();
-            res.send({ success: true, data: { url } });
+            res.status(200).send({ success: true, data: { url } });
           } else if (!!email && !!tokens) {
-            res.send({ success: true, data: { isLogin: true, email, tokens } });
+            res
+              .status(200)
+              .send({ success: true, data: { isLogin: true, email, tokens } });
           }
         } else {
           await clearCookie({ req, res });
           url = await generateURL();
-          res.send({ success: true, data: { url } });
+          res.status(200).send({ success: true, data: { url } });
         }
       }
     } catch (error) {
-      res.send({
+      res.status(404).send({
         success: false,
         error: error.stack,
         data: null,
@@ -101,10 +105,12 @@ export default {
           req.session.userId = nId;
         }
 
-        res.send({ success: true, data: { id: nId, email, tokens } });
+        res
+          .status(200)
+          .send({ success: true, data: { id: nId, email, tokens } });
       }
     } catch (error) {
-      res.send({
+      res.status(404).send({
         success: false,
         error: error.stack,
       });
@@ -113,11 +119,11 @@ export default {
   logout: async (req: RequestSession, res: Response) => {
     try {
       await clearCookie({ req, res });
-      res.send({
+      res.status(200).send({
         success: true,
       });
     } catch (error) {
-      res.send({
+      res.status(404).send({
         success: false,
         error: error.stack,
       });

@@ -14,7 +14,7 @@ export default {
       const user = users.find((v: any) => v.id === req.session.userId);
       if (!user) {
         await clearCookie({ req, res });
-        res.send({ success: false });
+        res.status(404).send({ success: false });
         return;
       }
       client.setCredentials(user.tokens);
@@ -32,7 +32,7 @@ export default {
         pageToken: currentPage,
       });
 
-      res.send({
+      res.status(200).send({
         success: true,
         data: {
           files: files.data.files,
@@ -40,7 +40,7 @@ export default {
         },
       });
     } catch (error) {
-      res.send({
+      res.status(404).send({
         success: false,
         error: error.stack,
       });

@@ -39,7 +39,7 @@ export default {
       res.download(path.join(paths.OUTPUT, `${key}.zip`));
     } catch (e) {
       console.log(e);
-      res.send({
+      res.status(404).send({
         success: false,
         error: e.stack,
       });
@@ -53,7 +53,7 @@ export default {
       if (queue) {
         const selected = queue.find((v: any) => v.id === key);
         if (selected) {
-          res.send({
+          res.status(200).send({
             success: true,
             data: {
               status: selected.status,
@@ -61,17 +61,17 @@ export default {
             },
           });
         } else {
-          res.send({
+          res.status(404).send({
             success: false,
           });
         }
       } else {
-        res.send({
+        res.status(404).send({
           success: false,
         });
       }
     } catch (error) {
-      res.send({
+      res.status(404).send({
         success: false,
         error: error.stack,
       });
@@ -87,7 +87,7 @@ export default {
       const user = users.find((v: any) => v.id === req.session.userId);
       if (!user) {
         await clearCookie({ req, res });
-        res.send({ success: false });
+        res.status(404).send({ success: false });
         return;
       }
       client.setCredentials(user.tokens);
@@ -104,7 +104,7 @@ export default {
       const config = JSON.parse(templateJSON) as IConfig;
 
       if (!config) {
-        res.send({ success: false });
+        res.status(404).send({ success: false });
         return;
       }
 
@@ -146,9 +146,9 @@ export default {
 
       processCSV(key, config, db, drive, client, document);
 
-      res.send({ success: true, data: { key } });
+      res.status(200).send({ success: true, data: { key } });
     } catch (error) {
-      res.send({
+      res.status(404).send({
         success: false,
         error: error.stack,
       });
@@ -228,6 +228,7 @@ const processCSV = async (
         }
       }
 
+      console.log(res['FIRST NAME'], res['LAST NAME']);
       try {
         await Promise.all(
           config.plot.map((v) => {
@@ -261,9 +262,10 @@ const processCSV = async (
           })
         );
       } catch (e) {
-        console.log(e);
+        console.log('Conversion Error:', e);
       }
 
+      console.log('1');
       if (pages.length) {
         for (let np = 0; np < pages.length; np++) {
           const page = pages[np];
@@ -290,12 +292,19 @@ const processCSV = async (
         }
       }
 
+      console.log('2');
       const pdfBytes = await pdfDoc.save();
       await fs.writeFile(
-        path.join(paths.EXPORTS, `${document}-${key}-${i + 1}.pdf`),
+        path.join(
+          paths.EXPORTS,
+          `${document}-${key}-${i + 1}-${res['FIRST NAME']}-${
+            res['LAST NAME']
+          }.pdf`
+        ),
         pdfBytes
       );
 
+      console.log('3');
       queue[_i].status = ((i + 1) / max) * 100;
       db.set('queue', queue).write();
     }
@@ -341,9 +350,13 @@ export const archiveFiles = async ({
     archive.pipe(output);
 
     for (let i = 0; i < max; i++) {
-      const dir = path.join(paths.EXPORTS, `${document}-${key}-${i + 1}.pdf`);
-      console.log(dir);
-      archive.file(dir, { name: `${i + 1}.pdf` });
+      const expectedFileName = `${document}-${key}-${i + 1}`;
+      const files = fs.readdirSync(paths.EXPORTS);
+      const file = files.find((v) => v.indexOf(expectedFileName) !== -1);
+      const dir = path.join(paths.EXPORTS, `${file}`);
+      const pdfName = file?.replace(expectedFileName, '');
+      console.log(dir, expectedFileName, file, pdfName);
+      archive.file(dir, { name: `${i + 1}${pdfName?.toLowerCase()}` });
     }
 
     archive.finalize();
@@ -417,9 +430,10 @@ export const placeValue = async (
             : fixedValue || value;
 
           if (type === 'date') {
-            field.setText(dayjs(_value).format(format));
+            console.log(_value);
+            field.setText(dayjs(_value.split('\n').join('')).format(format));
           } else {
-            field.setText(_value);
+            field.setText(_value.split('\n').join(''));
           }
           field.setFontSize(parseInt(size, 10));
         } catch (e) {
@@ -431,12 +445,13 @@ export const placeValue = async (
       case 'options': {
         const field = form.getOptionList(loc.key);
         fieldName = field.getName();
+        const _value = (fixedValue || value).split('\n').join('');
         try {
           if (!field) console.log(loc.key);
-          field.select(fixedValue || value);
+          field.select(_value);
         } catch (e) {
-          field.setOptions([fixedValue || value]);
-          field.select(fixedValue || value);
+          field.setOptions([_value]);
+          field.select(_value);
           console.log(fieldName);
           console.log(`Options Error: ${e.name}`);
         }
@@ -458,14 +473,15 @@ export const placeValue = async (
         const field = form.getDropdown(loc.key);
         fieldName = field.getName();
         console.log(fieldName, fixedValue || value);
+        const _value = (fixedValue || value).split('\n').join('');
         try {
           if (!field) console.log(loc.key);
           field.setFontSize(parseInt(size, 10));
-          field.select(fixedValue || value);
+          field.select(_value);
         } catch (e) {
           field.setFontSize(parseInt(size, 10));
-          field.setOptions([fixedValue || value]);
-          field.select(fixedValue || value);
+          field.setOptions([_value]);
+          field.select(_value);
           console.log(fieldName, fixedValue || value);
           console.log(`Dropdown Error: ${e.name}`);
         }
