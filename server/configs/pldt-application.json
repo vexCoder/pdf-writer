@@ -47,7 +47,7 @@
             "type": "date",
             "loc": [{
                 "key": "Birthday",
-                "originalFormat": "DD/MM/YYYY",
+                "originalFormat": "MM/DD/YYYY",
                 "type": "text"
             }]
         },
@@ -238,11 +238,11 @@
             "type": "date",
             "loc": [{
                 "key": "Customer signed date",
-                "originalFormat": "DD/MM/YYYY HH:mm:ss",
+                "originalFormat": "MM/DD/YYYY HH:mm:ss",
                 "type": "text"
             }, {
                 "key": "T&C Privacy Notice- Signed Date",
-                "originalFormat": "DD/MM/YYYY HH:mm:ss",
+                "originalFormat": "MM/DD/YYYY HH:mm:ss",
                 "type": "text"
             }]
         },
