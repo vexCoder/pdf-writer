@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "build": "tsc",
+        "postbuild": "cp -r configs dist/configs & cp -r documents dist/templates",
         "watch": "tsc --watch --preserveWatchOutput",
         "run:dev": "cross-env NODE_ENV=development nodemon -q --inspect dist/index.js",
         "run:start": "cross-env NODE_ENV=production node dist/index.js",
