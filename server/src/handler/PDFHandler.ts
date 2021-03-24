@@ -431,7 +431,12 @@ export const placeValue = async (
 
           if (type === 'date') {
             console.log(_value);
-            field.setText(dayjs(_value.split('\n').join('')).format(format));
+            field.setText(
+              dayjs(
+                _value.split('\n').join(''),
+                loc.originalFormat || 'DD/MM/YYYY'
+              ).format(format)
+            );
           } else {
             field.setText(_value.split('\n').join(''));
           }

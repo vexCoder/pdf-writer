@@ -23,6 +23,7 @@ export interface IConfigLocation {
   key: string;
   page?: string;
   row?: string;
+  originalFormat?: string;
   alignment?: 'Center' | 'Left' | 'Right';
   type?:
     | 'text'
