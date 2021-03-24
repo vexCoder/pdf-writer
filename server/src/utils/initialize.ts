@@ -102,6 +102,7 @@ export const loadCrons = async () => {
     const { expiring, notExpiring } = await getQueues();
 
     const exportDir = await fs.readdir(paths.EXPORTS);
+    const outDir = await fs.readdir(paths.OUTPUT);
     const tempDir = await fs.readdir(paths.TEMP);
 
     try {
@@ -116,6 +117,23 @@ export const loadCrons = async () => {
           })
           .map(async (v) => {
             await fs.unlink(path.join(paths.EXPORTS, v));
+          })
+      );
+
+      await Promise.all(
+        outDir
+          .filter((v) => {
+            const queue = db.get('queue').value();
+            const fileName = v.replace('.zip', '');
+            console.log(fileName);
+            const index = queue.findIndex(
+              (o: any) => fileName.indexOf(o.id) !== -1
+            );
+            console.log(index, queue);
+            return index === -1;
+          })
+          .map(async (v) => {
+            await fs.unlink(path.join(paths.OUTPUT, v));
           })
       );
 
