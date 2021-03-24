@@ -5,16 +5,18 @@
     "main": "index.js",
     "scripts": {
         "build": "tsc",
-        "postbuild": "cp -r configs dist/configs & cp -r documents dist/templates",
+        "postbuild": "cpy configs/* dist/configs & cpy documents/* dist/templates",
         "watch": "tsc --watch --preserveWatchOutput",
-        "run:dev": "cross-env NODE_ENV=development nodemon -q --inspect dist/index.js",
-        "run:start": "cross-env NODE_ENV=production node dist/index.js",
+        "run:dev": "yarn cred:dev & cross-env NODE_ENV=development nodemon -q --inspect dist/index.js",
+        "run:start": "yarn cred:prod & cross-env NODE_ENV=production node dist/index.js",
         "predev:test": "yarn install & yarn lint:fix",
         "dev": "concurrently -p \"[{time}] [{name}]\" -t HH:mm:ss -c red,green -n WATCH,DEV \"yarn watch\" \"yarn run:dev\"",
         "start": "concurrently -p \"[{time}] [{name}]\" -t HH:mm:ss -c green -n PROD \"yarn run:start\"",
         "read:pdf": "nodemon scripts/readPDF.js",
         "lint": "eslint src/*",
-        "lint:fix": "eslint --fix src/**/*.ts"
+        "lint:fix": "eslint --fix src/**/*.ts",
+        "cred:dev": "cpy credentials/credentials_dev.json dist --rename=credentials.json",
+        "cred:prod": "cpy credentials/credentials_prod.json dist --rename=credentials.json"
     },
     "nodemonConfig": {
         "ignore": [
@@ -75,6 +77,7 @@
         "@typescript-eslint/eslint-plugin": "^4.15.2",
         "@typescript-eslint/parser": "^4.15.2",
         "concurrently": "^6.0.0",
+        "cpy-cli": "^3.1.1",
         "cross-env": "^7.0.3",
         "eslint": "^7.21.0",
         "eslint-config-airbnb-base": "^14.2.1",

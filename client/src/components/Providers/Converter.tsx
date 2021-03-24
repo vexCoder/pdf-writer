@@ -14,6 +14,7 @@ interface IConverterContextValue {
   downloadStatus?: number;
   setIsConverting: SetStateForce<boolean>;
   setIsComplete: SetStateForce<boolean>;
+  setKey: SetStateForce<string | null>;
   convert: (data: IConvert) => Promise<void>;
   download: (key: string) => Promise<void>;
   getStatus: () => Promise<number>;
@@ -22,6 +23,7 @@ interface IConverterContextValue {
 const initialData: IConverterContextValue = {
   setIsConverting: () => null,
   setIsComplete: () => null,
+  setKey: () => null,
   convert: async (id) => {
     return;
   },
@@ -130,6 +132,7 @@ const ConverterProvider: React.FunctionComponent<IConverterContextProps> = ({
         getStatus,
         convert,
         key,
+        setKey,
         download,
         downloadStatus,
       }}

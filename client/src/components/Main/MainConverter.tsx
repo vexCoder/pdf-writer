@@ -35,6 +35,7 @@ const MainConverter: React.FC<IMainConverter> = ({}) => {
     setIsConverting,
     setIsComplete,
     isCompressing,
+    setKey,
   } = useConverterContext();
   const [show, setShow] = React.useState(false);
   const [status, setStatus] = React.useState(0);
@@ -62,6 +63,8 @@ const MainConverter: React.FC<IMainConverter> = ({}) => {
       setIsComplete(false);
     }
 
+    if (!selected && !selectedFile) handleClose();
+
     setLocalSelected(selected?.id);
     setLocalSelectedFile(selectedFile);
   }, [selected, selectedFile]);
@@ -72,13 +75,24 @@ const MainConverter: React.FC<IMainConverter> = ({}) => {
     }
   }, 1000);
 
+  const handleClose = () => {
+    setKey(null);
+    setShow(false);
+    setSelectedFile(null);
+    setStatus(0);
+    setIsConverting(false);
+    setIsComplete(false);
+    setLocalSelected(null);
+    setLocalSelectedFile(null);
+  };
+  console.log(status);
   return (
     <div className={classes.root}>
       <MainConverterSelected
         show={show}
         selected={selected}
         selectedFile={selectedFile}
-        handleClose={() => setShow(false)}
+        handleClose={handleClose}
         handleSelected={() => {
           setSelected(null);
           setSelectedFile(null);

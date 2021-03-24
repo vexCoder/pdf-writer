@@ -284,6 +284,29 @@ const processCSV = async (
                 size: 128,
                 color: rgb(1, 0, 0),
                 lineHeight: 24,
+                opacity: 0.25,
+                rotate: degrees(30),
+              });
+            }
+          }
+
+          const row = 7;
+          const col = 10;
+          for (let x = 0; x < row; x++) {
+            for (let y = 0; y < col; y++) {
+              const text = 'RAP';
+              const x1 = (page.getWidth() / row) * x;
+              const x2 = (page.getWidth() / row) * (x + 1);
+              const y1 = (page.getHeight() / col) * y;
+              const y2 = (page.getHeight() / col) * (y + 1);
+              const centerX = (x1 + x2) / 2;
+              const centerY = (y1 + y2) / 2;
+              page.drawText(text, {
+                x: centerX - (text.length * 24) / 4,
+                y: centerY - 24,
+                size: 24,
+                color: rgb(1, 0, 0),
+                lineHeight: 24,
                 opacity: 0.45,
                 rotate: degrees(30),
               });
