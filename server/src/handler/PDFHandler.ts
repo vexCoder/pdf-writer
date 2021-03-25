@@ -290,8 +290,8 @@ const processCSV = async (
             }
           }
 
-          const row = 7;
-          const col = 10;
+          const row = 12;
+          const col = 16;
           for (let x = 0; x < row; x++) {
             for (let y = 0; y < col; y++) {
               const text = 'RAP';
