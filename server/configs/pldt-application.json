@@ -280,8 +280,13 @@
                 "key": "Modem Fee Installation Fee 1",
                 "type": "text"
             }, {
-                "key": "Modem Fee Installation Fee 2",
-                "type": "text"
+                "key": "Modem Fee One Time",
+                "value": "HBBS",
+                "type": "checkbox"
+            }, {
+                "key": "Modem Fee Installment",
+                "value": "100/MONTH",
+                "type": "checkbox"
             }]
         },
         {

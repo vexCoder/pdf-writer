@@ -604,10 +604,19 @@ export const placeValue = async (
         fieldName = field.getName();
         try {
           if (!field) console.log(loc.key);
+          let valuex;
+          console.log(
+            loc.key,
+            optionValues,
+            value,
+            (optionValues || [])[parseInt(value, 10)],
+            loc.value
+          );
+          if (optionValues)
+            valuex = optionValues[parseInt(value, 10)] === loc.value ? 1 : 0;
+          else if (fixedValue) valuex = parseInt(fixedValue, 10);
+          else valuex = parseInt(value, 10);
 
-          const valuex = fixedValue
-            ? parseInt(fixedValue, 10)
-            : parseInt(value, 10);
           if (valuex === 1) {
             console.log(fixedValue, valuex === 1, valuex, typeof fixedValue);
             field.check();
