@@ -11,6 +11,7 @@ import lowdb from 'lowdb';
 import session from 'express-session';
 import FileSync from 'lowdb/adapters/FileSync';
 import fs from 'fs-extra';
+import { google } from 'googleapis';
 import router from './routes';
 import {
   createFolders,
@@ -20,7 +21,9 @@ import {
   copyTemplates,
   copyConfigs,
   loadCrons,
+  loadCredentials,
 } from './utils/initialize';
+import { extractID } from './handler/PDFHandler';
 
 dotenv.config({
   path: path.join(__dirname, '..', `.env.${process.env.NODE_ENV}`),
@@ -119,6 +122,36 @@ const main = async () => {
 
   app.get('/api', (_request, response) => {
     response.send(`pdf-writer ${process.env.API_VERSION}`);
+  });
+
+  app.get('/api/test', async (_request, response) => {
+    const data = [
+      `https://drive.google.com/open?id=1Qlh6dgE536A9abX3WyR6iERyf0zNR0TI`,
+    ];
+    const db = await loadDb();
+    const id = extractID(data[0]);
+    const client = await loadCredentials();
+    const users = db.get('users').value();
+    const user = users.find(
+      (v: any) => v.id === (_request.session as any).userId
+    );
+    client.setCredentials(user.tokens);
+    const drive = google.drive({
+      version: 'v3',
+      auth: client,
+    });
+    const img = await drive.files.get(
+      {
+        auth: client,
+        fileId: id,
+        alt: 'media',
+      },
+      { responseType: 'arraybuffer' }
+    );
+    console.log(img.data);
+    const imageView = Buffer.from(img.data as ArrayBuffer);
+    response.contentType('image/jpeg');
+    response.end(imageView);
   });
 
   // app.get('*', (_request, response) => {

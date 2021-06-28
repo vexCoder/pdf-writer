@@ -8,7 +8,11 @@
             "s": "8",
             "fixedValue": "RAP",
             "loc": [{
-                "key": "PLDT rep printed name SC",
+                "key": "PLDT rep printed name SC 1",
+                "alignment": "Center",
+                "type": "text"
+            }, {
+                "key": "PLDT rep printed name SC 2",
                 "alignment": "Center",
                 "type": "text"
             }]
@@ -56,7 +60,7 @@
             "key": "VALID ID - MUST BE CLEAR",
             "s": "8",
             "loc": [{
-                "key": "IDProvided",
+                "key": "IDProvided 1",
                 "type": "dropdown"
             }]
         },
@@ -65,7 +69,10 @@
             "key": "ID NUMBER or LICENSE NUMBER",
             "s": "8",
             "loc": [{
-                "key": "ID Number",
+                "key": "ID Number 1",
+                "type": "text"
+            }, {
+                "key": "ID Number 3",
                 "type": "text"
             }]
         },
@@ -171,7 +178,7 @@
 
             "key": "HOME FIBR LOCK UP PLANS",
             "s": "8",
-            "fixedValue": "FBMKTPLACE",
+            "fixedValue": "DLR_MIN_0005",
             "loc": [{
                 "key": "MIN",
                 "type": "text"
@@ -179,12 +186,22 @@
         },
         {
 
-            "key": "Lock-in-plan",
+            "key": "Lock-in-plan Text",
             "s": "8",
-            "fixedValue": "2",
+            "fixedValue": "FIBR plans: 36 months",
             "loc": [{
-                "key": "Lock-in-plan",
-                "type": "radio"
+                "key": "Lock-in-plan Text",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Lock-in-plan Check",
+            "s": "8",
+            "fixedValue": "1",
+            "loc": [{
+                "key": "Lock-in-plan Check",
+                "type": "checkbox"
             }]
         },
         {
@@ -204,7 +221,7 @@
 
             "key": "Sales Event Code1",
             "s": "8",
-            "fixedValue": "FBMKTPLACE",
+            "fixedValue": "DLR_MIN_0005",
             "loc": [{
                 "key": "Sales Event Code1",
                 "type": "text"
@@ -224,7 +241,7 @@
 
             "key": "MIN",
             "s": "8",
-            "fixedValue": "FBMKTPLACE",
+            "fixedValue": "DLR_MIN_0005",
             "loc": [{
                 "key": "MIN",
                 "type": "text"
@@ -238,6 +255,14 @@
             "type": "date",
             "loc": [{
                 "key": "Customer signed date",
+                "originalFormat": "MM/DD/YYYY HH:mm:ss",
+                "type": "text"
+            }, {
+                "key": "Customer signed date 1",
+                "originalFormat": "MM/DD/YYYY HH:mm:ss",
+                "type": "text"
+            }, {
+                "key": "Customer signed date 2",
                 "originalFormat": "MM/DD/YYYY HH:mm:ss",
                 "type": "text"
             }, {
@@ -277,6 +302,9 @@
                 "page": "1",
                 "row": "1",
                 "type": "attachment"
+            }, {
+                "key": "ID Image",
+                "type": "image"
             }]
         },
         {
@@ -312,7 +340,13 @@
             }, {
                 "key": "Data (broadband/internet) service 2",
                 "type": "dropdown"
-            }, {
+            }]
+        },
+        {
+
+            "key": "HOME FIBR LOCK UP PLANS",
+            "s": "8",
+            "loc": [{
                 "key": "Speed 1",
                 "type": "text"
             }, {
@@ -337,6 +371,9 @@
                 "type": "text"
             }, {
                 "key": "Customer printed name CAF 2",
+                "type": "text"
+            }, {
+                "key": "Customer printed name CAF 3",
                 "type": "text"
             }]
         }

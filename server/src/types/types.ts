@@ -32,5 +32,6 @@ export interface IConfigLocation {
     | 'radio'
     | 'attachment'
     | 'checkbox'
-    | 'attachment';
+    | 'attachment'
+    | 'image';
 }

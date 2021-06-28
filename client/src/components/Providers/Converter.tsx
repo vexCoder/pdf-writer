@@ -59,7 +59,8 @@ const ConverterProvider: React.FunctionComponent<IConverterContextProps> = ({
     if (file) {
       formData = new FormData();
       formData.append('document', 'pldt-application');
-      formData.append('file', file);
+      formData.append('file', file, file.name);
+      console.log(formData);
       res = await fetch.upload({
         url: `${import.meta.env.VITE_APP_API}/d/convert`,
         formData,

@@ -21,6 +21,7 @@ const main = async() => {
         const fields = form.getFields().map((field) => {
             const type = field.constructor.name
             const name = field.getName()
+            console.log({ type, name })
             const widgets = field.acroField.getWidgets()
             return {
                 type,

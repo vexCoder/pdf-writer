@@ -205,6 +205,7 @@ const processCSV = async (
     });
   });
 
+  console.log(ndata);
   if (queue[_i]) {
     queue[_i].process = 'converting';
     db.set('queue', queue).write();
@@ -230,92 +231,66 @@ const processCSV = async (
 
       console.log(res['FIRST NAME'], res['LAST NAME']);
       try {
-        await Promise.all(
-          config.plot.map((v) => {
-            let value;
+        // await Promise.all(
+        //   .map((v) => {
 
-            if (v.formatValue) {
-              value = v.keyValues
-                ?.map((o) => (res as any)[o])
-                .reduce(
-                  (p, c, index) => p.replace(`${index}`, c),
-                  v.formatValue
-                );
-            } else {
-              value = (res as any)[v.key];
-            }
+        //   })
+        // );
+        for (let ii = 0; ii < config.plot.length; ii++) {
+          const v = config.plot[ii];
+          let value;
 
-            return placeValue(
-              value,
-              parseInt(config.imageRows, 10),
-              v.loc,
-              v.s,
-              pdfDoc,
-              drive,
-              client,
-              pages,
-              v.type,
-              v.format,
-              v.fixedValue,
-              v.optionValues
-            );
-          })
-        );
+          if (v.formatValue) {
+            value = v.keyValues
+              ?.map((o) => (res as any)[o])
+              .reduce((p, c, index) => p.replace(`${index}`, c), v.formatValue);
+          } else {
+            value = (res as any)[v.key];
+          }
+
+          await placeValue(
+            value,
+            parseInt(config.imageRows, 10),
+            v.loc,
+            v.s,
+            pdfDoc,
+            drive,
+            client,
+            pages,
+            v.type,
+            v.format,
+            v.fixedValue,
+            v.optionValues
+          ).catch((e) => console.log(e));
+        }
       } catch (e) {
         console.log('Conversion Error:', e);
       }
 
-      console.log('1');
       if (pages.length) {
         for (let np = 0; np < pages.length; np++) {
           const page = pages[np];
-          for (let x = 0; x < 2; x++) {
-            for (let y = 0; y < 4; y++) {
-              const text = 'RAP';
-              const x1 = (page.getWidth() / 2) * x;
-              const x2 = (page.getWidth() / 2) * (x + 1);
-              const y1 = (page.getHeight() / 4) * y;
-              const y2 = (page.getHeight() / 4) * (y + 1);
-              const centerX = (x1 + x2) / 2;
-              const centerY = (y1 + y2) / 2;
-              page.drawText(text, {
-                x: centerX - (text.length * 128) / 4,
-                y: centerY - 128,
-                size: 128,
-                color: rgb(1, 0, 0),
-                lineHeight: 24,
-                opacity: 0.25,
-                rotate: degrees(30),
-              });
-            }
-          }
-
-          const row = 12;
-          const col = 16;
-          for (let x = 0; x < row; x++) {
-            for (let y = 0; y < col; y++) {
-              const text = 'RAP';
-              const x1 = (page.getWidth() / row) * x;
-              const x2 = (page.getWidth() / row) * (x + 1);
-              const y1 = (page.getHeight() / col) * y;
-              const y2 = (page.getHeight() / col) * (y + 1);
-              const centerX = (x1 + x2) / 2;
-              const centerY = (y1 + y2) / 2;
-              page.drawText(text, {
-                x: centerX - (text.length * 24) / 4,
-                y: centerY - 24,
-                size: 24,
-                color: rgb(1, 0, 0),
-                lineHeight: 24,
-                opacity: 0.45,
-                rotate: degrees(30),
-              });
-            }
-          }
+          await drawWatermark(page, {
+            x: 0,
+            y: 0,
+            width: page.getWidth(),
+            height: page.getHeight(),
+            row: 2,
+            col: 4,
+            size: 128,
+          });
+          await drawWatermark(page, {
+            x: 0,
+            y: 0,
+            width: page.getWidth(),
+            height: page.getHeight(),
+            row: 12,
+            col: 16,
+            size: 24,
+          });
         }
       }
 
-      console.log('2');
       const pdfBytes = await pdfDoc.save();
       await fs.writeFile(
         path.join(
@@ -327,7 +302,6 @@ const processCSV = async (
         pdfBytes
       );
 
-      console.log('3');
       queue[_i].status = ((i + 1) / max) * 100;
       db.set('queue', queue).write();
     }
@@ -350,6 +324,51 @@ const processCSV = async (
   //   queue[_i].status = ((i + 1) / data.length) * 100;
   //   db.set('queue', queue).write();
   // }
+};
+interface Dimensions {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  row: number;
+  col: number;
+  size: number;
+  scale?: number;
+}
+
+const drawWatermark = async (
+  page: PDFPage,
+  dim: Dimensions = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    row: 0,
+    col: 0,
+    size: 24,
+  }
+) => {
+  const { row, col } = dim;
+  for (let x = 0; x < row; x++) {
+    for (let y = 0; y < col; y++) {
+      const text = 'RAP';
+      const x1 = ((dim.width * (dim.scale || 1)) / row) * x + dim.x;
+      const x2 = ((dim.width * (dim.scale || 1)) / row) * (x + 1) + dim.x;
+      const y1 = ((dim.height * (dim.scale || 1)) / col) * y + dim.y;
+      const y2 = ((dim.height * (dim.scale || 1)) / col) * (y + 1) + dim.y;
+      const centerX = (x1 + x2) / 2;
+      const centerY = (y1 + y2) / 2;
+      page.drawText(text, {
+        x: centerX - (text.length * dim.size * (dim.scale || 1)) / 4,
+        y: centerY - dim.size * (dim.scale || 1),
+        size: dim.size * (dim.scale || 1),
+        color: rgb(1, 0, 0),
+        lineHeight: dim.size * (dim.scale || 1),
+        opacity: 0.45,
+        rotate: degrees(30),
+      });
+    }
+  }
 };
 
 interface IArchiveFiles {
@@ -467,6 +486,71 @@ export const placeValue = async (
         } catch (e) {
           console.log(fieldName);
           console.log(`Textfield Error: ${e.name}`);
+        }
+        break;
+      }
+      case 'image': {
+        const data = value ? (value.split(',') as string[]) : [];
+        const field = form.getButton(loc.key);
+        fieldName = field.getName();
+        const widget = field.acroField.getWidgets()[0];
+        const page = pdfDoc.findPageForAnnotationRef(field.ref);
+        const { width, height, x, y } = widget.getRectangle();
+        try {
+          if (!field) console.log(loc.key);
+          const id = extractID(data[0]);
+          const img = await drive.files.get(
+            {
+              auth: client,
+              fileId: id,
+              alt: 'media',
+            },
+            { responseType: 'arraybuffer' }
+          );
+
+          const image = await pdfDoc.embedJpg(img.data as ArrayBuffer);
+          if (page) {
+            const { height: imgH, width: imgW } = image;
+            const aspectRatio = imgH / imgW;
+            const preferredWidth = _.clamp(
+              page.getWidth() / data.length - 20,
+              140
+            );
+
+            const newHeight = _.clamp(
+              aspectRatio * preferredWidth,
+              page.getHeight() / imageRows
+            );
+
+            page.drawImage(image, {
+              width: _.clamp(preferredWidth, 0, width),
+              height: _.clamp(newHeight, 0, height),
+              x,
+              y,
+            });
+            await drawWatermark(page, {
+              width,
+              height,
+              x,
+              y,
+              row: 4,
+              col: 8,
+              size: 18,
+            });
+            await drawWatermark(page, {
+              width,
+              height,
+              x,
+              y,
+              row: 2,
+              col: 1,
+              size: 64,
+            });
+            page.setBleedBox(x, y, width, height);
+          }
+        } catch (e) {
+          console.log(fieldName);
+          console.log(`Image Error: ${e.name}`);
         }
         break;
       }
@@ -616,4 +700,4 @@ export const placeValue = async (
   }
 };
 
-const extractID = (url: string) => url.split('id=')[1];
+export const extractID = (url: string) => url.split('id=')[1];
