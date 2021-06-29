@@ -109,7 +109,7 @@
             "s": "8",
             "loc": [{
                 "key": "Barangay",
-                "type": "options"
+                "type": "text"
             }]
         },
         {
@@ -118,7 +118,7 @@
             "s": "8",
             "loc": [{
                 "key": "City",
-                "type": "options"
+                "type": "text"
             }]
         },
         {
@@ -356,6 +356,9 @@
                 "type": "text"
             }, {
                 "key": "Speed 2",
+                "type": "text"
+            }, {
+                "key": "Speed 3",
                 "type": "text"
             }]
         },
