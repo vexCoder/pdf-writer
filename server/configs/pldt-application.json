@@ -341,7 +341,7 @@
             "s": "8",
             "loc": [{
                 "key": "Data (broadband/internet) service 1",
-                "type": "dropdown"
+                "type": "text"
             }, {
                 "key": "Data (broadband/internet) service 2",
                 "type": "dropdown"
@@ -359,6 +359,9 @@
                 "type": "text"
             }, {
                 "key": "Speed 3",
+                "type": "text"
+            }, {
+                "key": "Data (broadband/internet) service 1",
                 "type": "text"
             }]
         },

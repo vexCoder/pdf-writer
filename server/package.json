@@ -10,6 +10,7 @@
         "run:dev": "yarn cred:dev & cross-env NODE_ENV=development nodemon -q --inspect dist/index.js",
         "run:start": "yarn cred:prod & cross-env NODE_ENV=production node dist/index.js",
         "predev:test": "yarn install & yarn lint:fix",
+        "predev": "yarn build",
         "dev": "concurrently -p \"[{time}] [{name}]\" -t HH:mm:ss -c red,green -n WATCH,DEV \"yarn watch\" \"yarn run:dev\"",
         "start": "concurrently -p \"[{time}] [{name}]\" -t HH:mm:ss -c green -n PROD \"yarn run:start\"",
         "read:pdf": "nodemon scripts/readPDF.js",

@@ -15,6 +15,7 @@ import {
   PDFDocument,
   PDFImage,
   PDFPage,
+  PDFTextField,
   rgb,
   TextAlignment,
 } from 'pdf-lib';
@@ -459,33 +460,62 @@ export const placeValue = async (
     let fieldName = '';
     switch (loc.type) {
       case 'text': {
-        const field = form.getTextField(loc.key);
+        const field: PDFTextField = form.getTextField(loc.key);
         fieldName = field.getName();
-        try {
-          if (!field) console.log(loc.key);
-          field.setMaxLength(500);
-          if (loc.alignment) {
-            field.setAlignment(TextAlignment[loc.alignment]);
-          }
-          const _value = optionValues
-            ? optionValues[parseInt(value, 10)]
-            : fixedValue || value;
+        if (field) {
+          try {
+            console.log(loc.key);
+            field.setMaxLength(500);
+            if (loc.alignment) {
+              field.setAlignment(TextAlignment[loc.alignment]);
+            }
+            const _value = optionValues
+              ? optionValues[parseInt(value, 10)]
+              : fixedValue || value;
 
-          if (type === 'date') {
-            console.log(_value);
-            field.setText(
-              dayjs(
-                _value.split('\n').join(''),
-                loc.originalFormat || 'DD/MM/YYYY'
-              ).format(format)
-            );
-          } else {
-            field.setText(_value.split('\n').join(''));
+            if (type === 'date') {
+              console.log(_value);
+              field.setText(
+                dayjs(
+                  _value.split('\n').join(''),
+                  loc.originalFormat || 'DD/MM/YYYY'
+                ).format(format)
+              );
+            } else {
+              field.setText(_value.split('\n').join(''));
+            }
+            field.setFontSize(parseInt(size, 10));
+          } catch (e) {
+            console.log(fieldName);
+            console.log(`Textfield Error: ${e.name}`);
           }
-          field.setFontSize(parseInt(size, 10));
-        } catch (e) {
-          console.log(fieldName);
-          console.log(`Textfield Error: ${e.name}`);
+        }
+
+        if (!field) {
+          const dropdown = form.getDropdown(loc.key);
+          try {
+            console.log(loc.key);
+            const _value = optionValues
+              ? optionValues[parseInt(value, 10)]
+              : fixedValue || value;
+
+            if (type === 'date') {
+              console.log(_value);
+              dropdown.select(
+                dayjs(
+                  _value.split('\n').join(''),
+                  loc.originalFormat || 'DD/MM/YYYY'
+                ).format(format),
+                true
+              );
+            } else {
+              dropdown.select(_value.split('\n').join(''), true);
+            }
+            dropdown.setFontSize(parseInt(size, 10));
+          } catch (e) {
+            console.log(fieldName);
+            console.log(`Dropdown Error: ${e.name}`);
+          }
         }
         break;
       }
