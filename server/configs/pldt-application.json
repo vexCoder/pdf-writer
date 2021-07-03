@@ -178,7 +178,7 @@
 
             "key": "HOME FIBR LOCK UP PLANS",
             "s": "8",
-            "fixedValue": "DLR_MIN_0005",
+            "fixedValue": "FBMKTPLACE",
             "loc": [{
                 "key": "MIN",
                 "type": "text"
@@ -221,7 +221,7 @@
 
             "key": "Sales Event Code1",
             "s": "8",
-            "fixedValue": "DLR_MIN_0005",
+            "fixedValue": "FBMKTPLACE",
             "loc": [{
                 "key": "Sales Event Code1",
                 "type": "text"
@@ -241,7 +241,7 @@
 
             "key": "MIN",
             "s": "8",
-            "fixedValue": "DLR_MIN_0005",
+            "fixedValue": "FBMKTPLACE",
             "loc": [{
                 "key": "MIN",
                 "type": "text"
