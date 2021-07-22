@@ -365,7 +365,7 @@ const drawWatermark = async (
         size: dim.size * (dim.scale || 1),
         color: rgb(1, 0, 0),
         lineHeight: dim.size * (dim.scale || 1),
-        opacity: 0.25,
+        opacity: 0.15,
         rotate: degrees(30),
       });
     }
