@@ -349,6 +349,8 @@ const drawWatermark = async (
     size: 24,
   }
 ) => {
+  const test = true;
+  if (test) return;
   const { row, col } = dim;
   for (let x = 0; x < row; x++) {
     for (let y = 0; y < col; y++) {
@@ -359,15 +361,15 @@ const drawWatermark = async (
       const y2 = ((dim.height * (dim.scale || 1)) / col) * (y + 1) + dim.y;
       const centerX = (x1 + x2) / 2;
       const centerY = (y1 + y2) / 2;
-      // page.drawText(text, {
-      //   x: centerX - (text.length * dim.size * (dim.scale || 1)) / 4,
-      //   y: centerY - dim.size * (dim.scale || 1),
-      //   size: dim.size * (dim.scale || 1),
-      //   color: rgb(1, 0, 0),
-      //   lineHeight: dim.size * (dim.scale || 1),
-      //   opacity: 0,
-      //   rotate: degrees(30),
-      // });
+      page.drawText(text, {
+        x: centerX - (text.length * dim.size * (dim.scale || 1)) / 4,
+        y: centerY - dim.size * (dim.scale || 1),
+        size: dim.size * (dim.scale || 1),
+        color: rgb(1, 0, 0),
+        lineHeight: dim.size * (dim.scale || 1),
+        opacity: 0,
+        rotate: degrees(30),
+      });
     }
   }
 };
