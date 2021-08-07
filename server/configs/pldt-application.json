@@ -273,24 +273,6 @@
         },
         {
 
-            "key": "Modem Fee + Installation Fee",
-            "s": "8",
-            "optionValues": ["HBBS", "100/MONTH"],
-            "loc": [{
-                "key": "Modem Fee Installation Fee 1",
-                "type": "text"
-            }, {
-                "key": "Modem Fee One Time",
-                "value": "HBBS",
-                "type": "checkbox"
-            }, {
-                "key": "Modem Fee Installment",
-                "value": "100/MONTH",
-                "type": "checkbox"
-            }]
-        },
-        {
-
             "key": "Authorize to publish name in White Pages 2",
             "s": "8",
             "fixedValue": "1",
