@@ -97,7 +97,7 @@
         {
 
             "key": "SUBDIVISION/VILLAGE or PUROK",
-            "s": "8",
+            "s": "6",
             "loc": [{
                 "key": "Village/Sub Division",
                 "type": "text"
@@ -133,7 +133,7 @@
         {
 
             "key": "LANDMARK",
-            "s": "8",
+            "s": "6",
             "loc": [{
                 "key": "Nearest landmark",
                 "type": "text"
@@ -268,6 +268,16 @@
             }, {
                 "key": "T&C Privacy Notice- Signed Date",
                 "originalFormat": "MM/DD/YYYY HH:mm:ss",
+                "type": "text"
+            }]
+        },
+        {
+
+            "key": "Modem Fee + Installation Fee",
+            "s": "8",
+            "optionValues": ["HBBS", "100/MONTH"],
+            "loc": [{
+                "key": "Modem Fee Installation Fee 1",
                 "type": "text"
             }]
         },
