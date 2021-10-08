@@ -279,6 +279,10 @@
             "loc": [{
                 "key": "Modem Fee Installation Fee 1",
                 "type": "text"
+            },
+            {
+                "key": "Promo code 2",
+                "type": "text"
             }]
         },
         {
