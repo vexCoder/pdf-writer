@@ -2,387 +2,504 @@
     "key": "pldt-application",
     "newPage": "1",
     "imageRows": "2",
-    "plot": [{
-
+    "plot": [
+        {
             "key": "PLDT rep printed name SC",
             "s": "8",
             "fixedValue": "RAP",
-            "loc": [{
-                "key": "PLDT rep printed name SC 1",
-                "alignment": "Center",
-                "type": "text"
-            }, {
-                "key": "PLDT rep printed name SC 2",
-                "alignment": "Center",
-                "type": "text"
-            }]
-        }, {
-
+            "loc": [
+                {
+                    "key": "PLDT rep printed name SC 1",
+                    "alignment": "Center",
+                    "type": "text"
+                },
+                {
+                    "key": "PLDT rep printed name SC 2",
+                    "alignment": "Center",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "certify-rap",
+            "s": "8",
+            "fixedValue": "RAP",
+            "loc": [
+                {
+                    "key": "certify-rap-1",
+                    "alignment": "Center",
+                    "type": "text"
+                },
+                {
+                    "key": "certify-rap-2",
+                    "alignment": "Center",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "kim-doronio",
+            "s": "8",
+            "fixedValue": "Kim Doronio",
+            "loc": [
+                {
+                    "key": "kim-doronio",
+                    "alignment": "Center",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "Subscriber Name",
+            "keyValues": [
+                "FIRST NAME",
+                "MIDDLE NAME",
+                "LAST NAME"
+            ],
+            "formatValue": "0 1 2",
+            "s": "8",
+            "loc": [
+                {
+                    "key": "subscriber-name",
+                    "alignment": "Center",
+                    "type": "text"
+                }
+            ]
+        },
+        {
             "key": "FIRST NAME",
             "s": "8",
-            "loc": [{
-                "key": "Customer's first name",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Customer's first name",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "MIDDLE NAME",
             "s": "8",
-            "loc": [{
-                "key": "Customer's middle name",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Customer's middle name",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "LAST NAME",
             "s": "8",
-            "loc": [{
-                "key": "Customer's last name",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Customer's last name",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "DATE OF BIRTH",
             "s": "8",
             "format": "MM/DD/YYYY",
             "type": "date",
-            "loc": [{
-                "key": "Birthday",
-                "originalFormat": "MM/DD/YYYY",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Birthday",
+                    "originalFormat": "MM/DD/YYYY",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "VALID ID - MUST BE CLEAR",
             "s": "8",
-            "loc": [{
-                "key": "IDProvided 1",
-                "type": "dropdown"
-            }]
+            "loc": [
+                {
+                    "key": "IDProvided 1",
+                    "type": "dropdown"
+                }
+            ]
         },
         {
-
             "key": "ID NUMBER or LICENSE NUMBER",
             "s": "8",
-            "loc": [{
-                "key": "ID Number 1",
-                "type": "text"
-            }, {
-                "key": "ID Number 3",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "ID Number 1",
+                    "type": "text"
+                },
+                {
+                    "key": "ID Number 3",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "STREET NAME",
             "s": "8",
-            "loc": [{
-                "key": "Street",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Street",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "HOUSE NO.",
             "s": "8",
-            "loc": [{
-                "key": "House No",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "House No",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "SUBDIVISION/VILLAGE or PUROK",
             "s": "6",
-            "loc": [{
-                "key": "Village/Sub Division",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Village/Sub Division",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "BARANGAY",
             "s": "8",
-            "loc": [{
-                "key": "Barangay",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Barangay",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "CITY/MUNICIPALITY",
             "s": "8",
-            "loc": [{
-                "key": "City",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "City",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "PROVINCE",
             "s": "8",
-            "loc": [{
-                "key": "Province",
-                "type": "dropdown"
-            }]
+            "loc": [
+                {
+                    "key": "Province",
+                    "type": "dropdown"
+                }
+            ]
         },
         {
-
             "key": "LANDMARK",
             "s": "6",
-            "loc": [{
-                "key": "Nearest landmark",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Nearest landmark",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "MOBILE NUMBER",
             "s": "8",
-            "loc": [{
-                "key": "Mobile number",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Mobile number",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "ALTERNATIVE MOBILE",
             "s": "8",
-            "loc": [{
-                "key": "Home number",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Home number",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "EMAIL ADDRESS",
             "s": "8",
-            "loc": [{
-                "key": "Email",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Email",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "ALTERNATIVE MOBILE",
             "s": "8",
-            "loc": [{
-                "key": "Home number",
-                "type": "text"
-            }]
-        }, {
-
+            "loc": [
+                {
+                    "key": "Home number",
+                    "type": "text"
+                }
+            ]
+        },
+        {
             "key": "HOME FIBR LOCK UP PLANS",
             "s": "8",
             "fixedValue": "FBMKTPLACE",
-            "loc": [{
-                "key": "MIN",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "MIN",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "Lock-in-plan Text",
             "s": "8",
             "fixedValue": "FIBR plans: 36 months",
-            "loc": [{
-                "key": "Lock-in-plan Text",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Lock-in-plan Text",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "Lock-in-plan Check",
             "s": "8",
             "fixedValue": "1",
-            "loc": [{
-                "key": "Lock-in-plan Check",
-                "type": "checkbox"
-            }]
+            "loc": [
+                {
+                    "key": "Lock-in-plan Check",
+                    "type": "checkbox"
+                }
+            ]
         },
         {
-
             "key": "Voice (landline/telephone) service 1",
             "s": "8",
             "fixedValue": "FTTH",
-            "loc": [{
-                "key": "Voice (landline/telephone) service 1",
-                "type": "text"
-            }, {
-                "key": "Voice (landline/telephone) service 2",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Voice (landline/telephone) service 1",
+                    "type": "text"
+                },
+                {
+                    "key": "Voice (landline/telephone) service 2",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "Sales Event Code1",
             "s": "8",
             "fixedValue": "FBMKTPLACE",
-            "loc": [{
-                "key": "Sales Event Code1",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Sales Event Code1",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "AgentCode1",
             "s": "8",
             "fixedValue": "P4205833",
-            "loc": [{
-                "key": "AgentCode1",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "AgentCode1",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "MIN",
             "s": "8",
             "fixedValue": "FBMKTPLACE",
-            "loc": [{
-                "key": "MIN",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "MIN",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "Timestamp",
             "s": "8",
             "format": "MMMM DD, YYYY",
             "type": "date",
-            "loc": [{
-                "key": "Customer signed date",
-                "originalFormat": "MM/DD/YYYY HH:mm:ss",
-                "type": "text"
-            }, {
-                "key": "Customer signed date 1",
-                "originalFormat": "MM/DD/YYYY HH:mm:ss",
-                "type": "text"
-            }, {
-                "key": "Customer signed date 2",
-                "originalFormat": "MM/DD/YYYY HH:mm:ss",
-                "type": "text"
-            }, {
-                "key": "T&C Privacy Notice- Signed Date",
-                "originalFormat": "MM/DD/YYYY HH:mm:ss",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Customer signed date",
+                    "originalFormat": "MM/DD/YYYY HH:mm:ss",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer signed date 1",
+                    "originalFormat": "MM/DD/YYYY HH:mm:ss",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer signed date 2",
+                    "originalFormat": "MM/DD/YYYY HH:mm:ss",
+                    "type": "text"
+                },
+                {
+                    "key": "T&C Privacy Notice- Signed Date",
+                    "originalFormat": "MM/DD/YYYY HH:mm:ss",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "Modem Fee + Installation Fee",
             "s": "8",
-            "optionValues": ["HBBS", "100/MONTH"],
-            "loc": [{
-                "key": "Modem Fee Installation Fee 1",
-                "type": "text"
-            },
-            {
-                "key": "Promo code 2",
-                "type": "text"
-            }]
+            "optionValues": [
+                "HBBS",
+                "100/MONTH"
+            ],
+            "loc": [
+                {
+                    "key": "Modem Fee Installation Fee 1",
+                    "type": "text"
+                },
+                {
+                    "key": "Promo code 2",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "Authorize to publish name in White Pages 2",
             "s": "8",
             "fixedValue": "1",
-            "loc": [{
-                "key": "Authorize to publish name in White Pages 2",
-                "type": "checkbox"
-            }]
+            "loc": [
+                {
+                    "key": "Authorize to publish name in White Pages 2",
+                    "type": "checkbox"
+                }
+            ]
         },
         {
-
             "key": "ID with 3 specimen signatures. ",
             "s": "8",
-            "loc": [{
-                "page": "1",
-                "row": "1",
-                "type": "attachment"
-            }, {
-                "key": "ID Image",
-                "type": "image"
-            }]
+            "loc": [
+                {
+                    "page": "8",
+                    "row": "1",
+                    "type": "attachment"
+                },
+                {
+                    "key": "ID Image",
+                    "type": "image"
+                }
+            ]
         },
         {
-
             "key": "SELFIE with your Valid ID",
             "s": "8",
-            "loc": [{
-                "page": "1",
-                "row": "2",
-                "type": "attachment"
-            }]
+            "loc": [
+                {
+                    "page": "8",
+                    "row": "2",
+                    "type": "attachment"
+                }
+            ]
         },
         {
-
+            "key": "Financial Documents",
+            "s": "8",
+            "loc": [
+                {
+                    "page": "8",
+                    "row": "3",
+                    "type": "attachment"
+                }
+            ]
+        },
+        {
             "key": "Volume Allowance",
             "s": "8",
             "fixedValue": "UNLI",
-            "loc": [{
-                "key": "Volume Allowance 1",
-                "type": "text"
-            }, {
-                "key": "Volume Allowance 2",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Volume Allowance 1",
+                    "type": "text"
+                },
+                {
+                    "key": "Volume Allowance 2",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "HOME FIBR LOCK UP PLANS",
             "s": "8",
-            "loc": [{
-                "key": "Data (broadband/internet) service 1",
-                "type": "text"
-            }, {
-                "key": "Data (broadband/internet) service 2",
-                "type": "dropdown"
-            }]
+            "loc": [
+                {
+                    "key": "Data (broadband/internet) service 1",
+                    "type": "text"
+                },
+                {
+                    "key": "Data (broadband/internet) service 2",
+                    "type": "dropdown"
+                }
+            ]
         },
         {
-
             "key": "HOME FIBR LOCK UP PLANS",
             "s": "8",
-            "loc": [{
-                "key": "Speed 1",
-                "type": "text"
-            }, {
-                "key": "Speed 2",
-                "type": "text"
-            }, {
-                "key": "Speed 3",
-                "type": "text"
-            }, {
-                "key": "Data (broadband/internet) service 1",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "Speed 1",
+                    "type": "text"
+                },
+                {
+                    "key": "Speed 2",
+                    "type": "text"
+                },
+                {
+                    "key": "Speed 3",
+                    "type": "text"
+                },
+                {
+                    "key": "Data (broadband/internet) service 1",
+                    "type": "text"
+                }
+            ]
         },
         {
-
             "key": "Customer Name",
-            "keyValues": ["FIRST NAME", "MIDDLE NAME", "LAST NAME"],
+            "keyValues": [
+                "FIRST NAME",
+                "MIDDLE NAME",
+                "LAST NAME"
+            ],
             "formatValue": "0 1 2",
             "s": "8",
-            "loc": [{
-                "key": "T&C Privacy Notice- Printed Name",
-                "type": "text"
-            }, {
-                "key": "T&C Printed Name",
-                "type": "text"
-            }, {
-                "key": "Customer printed name CAF 1",
-                "type": "text"
-            }, {
-                "key": "Customer printed name CAF 2",
-                "type": "text"
-            }, {
-                "key": "Customer printed name CAF 3",
-                "type": "text"
-            }]
+            "loc": [
+                {
+                    "key": "T&C Privacy Notice- Printed Name",
+                    "type": "text"
+                },
+                {
+                    "key": "T&C Printed Name",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer printed name CAF 1",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer printed name CAF 2",
+                    "type": "text"
+                },
+                {
+                    "key": "Customer printed name CAF 3",
+                    "type": "text"
+                }
+            ]
         }
     ]
 }

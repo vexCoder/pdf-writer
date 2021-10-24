@@ -225,7 +225,7 @@ const processCSV = async (
       if (!pages.length) {
         const maxPage = parseInt(config.newPage, 10);
         for (let j = 0; j < maxPage; j++) {
-          const page = pdfDoc.addPage(PageSizes.A4);
+          const page = pdfDoc.insertPage(8, PageSizes.A4);
           pages.push(page);
         }
       }
@@ -449,7 +449,7 @@ export const placeValue = async (
   pdfDoc: PDFDocument,
   drive: drive_v3.Drive,
   client: OAuth2Client,
-  pages: PDFPage[],
+  _pages: PDFPage[],
   type?: string,
   format?: string,
   fixedValue?: string,
@@ -666,7 +666,9 @@ export const placeValue = async (
         if (loc.page && loc.row) {
           const data = value ? (value.split(',') as string[]) : [];
           const locPage = parseInt(loc.page, 10);
-          const page = pages[locPage - 1];
+          const pages = await pdfDoc.getPages()
+          const page = pages[locPage];
+          console.log(locPage)
           try {
             const _row = parseInt(loc.row, 10);
 
