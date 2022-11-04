@@ -118,7 +118,7 @@ export default {
         });
 
         streamData = stream.data;
-      } else {
+      } else if (file) {
         streamData = await fs.readFile(file.path, 'utf8');
       }
 
@@ -180,10 +180,10 @@ const processCSV = async (
       step: (res) => {
         // WRITE DATA TO PDF
         if (headers.length === 0) {
-          headers = res.data;
+          headers = res.data as any[];
         } else {
           ndata.push(
-            res.data.reduce(
+            (res.data as any[]).reduce(
               (p, c, i) => ({
                 ...(p as { [key: string]: any }),
                 // @ts-ignore
@@ -199,7 +199,7 @@ const processCSV = async (
       complete: (res) => {
         resolve(res);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log(err);
         resolve(err);
       },
@@ -666,9 +666,9 @@ export const placeValue = async (
         if (loc.page && loc.row) {
           const data = value ? (value.split(',') as string[]) : [];
           const locPage = parseInt(loc.page, 10);
-          const pages = await pdfDoc.getPages()
+          const pages = await pdfDoc.getPages();
           const page = pages[locPage];
-          console.log(locPage)
+          console.log(locPage);
           try {
             const _row = parseInt(loc.row, 10);
 

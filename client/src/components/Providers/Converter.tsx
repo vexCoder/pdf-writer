@@ -33,9 +33,8 @@ const initialData: IConverterContextValue = {
   getStatus: async () => 0,
 };
 
-const ConverterContext = React.createContext<IConverterContextValue>(
-  initialData
-);
+const ConverterContext =
+  React.createContext<IConverterContextValue>(initialData);
 
 interface IConvert {
   id?: string;

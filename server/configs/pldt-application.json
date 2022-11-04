@@ -246,7 +246,7 @@
         {
             "key": "HOME FIBR LOCK UP PLANS",
             "s": "8",
-            "fixedValue": "FBMKTPLACE",
+            "fixedValue": "KAONL_MIN_005",
             "loc": [
                 {
                     "key": "MIN",
@@ -294,7 +294,7 @@
         {
             "key": "Sales Event Code1",
             "s": "8",
-            "fixedValue": "FBMKTPLACE",
+            "fixedValue": "KAONL_MIN_005",
             "loc": [
                 {
                     "key": "Sales Event Code1",
@@ -316,7 +316,7 @@
         {
             "key": "MIN",
             "s": "8",
-            "fixedValue": "FBMKTPLACE",
+            "fixedValue": "KAONL_MIN_005",
             "loc": [
                 {
                     "key": "MIN",

@@ -118,11 +118,23 @@ export default {
   },
   logout: async (req: RequestSession, res: Response) => {
     try {
+      const db = await loadDb();
+      const users = db.get('users').value();
+      const user = users.find((v: any) => v.id === req.session.userId);
       await clearCookie({ req, res });
+      const findUser = users.findIndex((v: any) => v.email === user.email);
+
+      if (user && findUser > -1) {
+        await logout(user.tokens);
+        users[findUser] = { ...users[findUser], tokens: undefined };
+        db.set('users', users).write();
+      }
+
       res.status(200).send({
         success: true,
       });
     } catch (error) {
+      console.error(error);
       res.status(404).send({
         success: false,
         error: error.stack,
@@ -141,6 +153,21 @@ async function saveToken(
   const me = await gmail.users.getProfile({ auth: oAuth2Client, userId: 'me' });
   const email = me.data.emailAddress;
   return { tokens, email };
+}
+
+async function logout(cred: Credentials) {
+  const oAuth2Client = await loadCredentials();
+  if (cred.refresh_token && cred.access_token) {
+    oAuth2Client.revokeToken(cred.access_token, (err) => {
+      console.error(err);
+    });
+    oAuth2Client.revokeToken(cred.refresh_token, (err) => {
+      console.error(err);
+    });
+    oAuth2Client.revokeCredentials((err) => {
+      console.error(err);
+    });
+  }
 }
 
 async function generateURL(): Promise<string> {
